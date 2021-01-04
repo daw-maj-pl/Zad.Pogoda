@@ -1,5 +1,3 @@
-const API_KEY = '73e7da577b9c2f3a8d8fad5924c04315';
-
 const weekdayFormat = new Intl.DateTimeFormat('pl', { weekday: 'short' });
 const dateFormat = new Intl.DateTimeFormat('pl', { dateStyle: 'short' });
 const timeFormat = new Intl.DateTimeFormat('pl', { timeStyle: 'short' });
@@ -7,7 +5,7 @@ const timeFormat = new Intl.DateTimeFormat('pl', { timeStyle: 'short' });
 document.getElementById('cities').addEventListener('change', e => {
   const cityName = e.target.value;
 
-  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&units=metric&lang=pl`)
+  fetch(`https://hide-api-key.herokuapp.com/api/search?q=${cityName}`)
     .then(resp => resp.json())
     .then(data => {
       if (document.getElementById('tab')) {
@@ -21,7 +19,7 @@ document.getElementById('cities').addEventListener('change', e => {
       const trImg = tab.appendChild(document.createElement('tr'));
       const trDescription = tab.appendChild(document.createElement('tr'));
 
-      const timestamps = data.list;
+      const timestamps = data.results.list;
 
       timestamps.forEach(timestamp => {
         const th = document.createElement('th');
