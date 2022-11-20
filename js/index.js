@@ -5,11 +5,13 @@ const timeFormat = new Intl.DateTimeFormat('pl', { timeStyle: 'short' });
 document.getElementById('cities').addEventListener('change', e => {
   const cityName = e.target.value;
 
-  fetch(`https://hide-api-key.herokuapp.com/api/search?q=${cityName}`)
+  fetch(`https://hide-api-key.onrender.com/api/search?q=${cityName}`)
     .then(resp => resp.json())
     .then(data => {
       if (document.getElementById('tab')) {
-        document.getElementById('output').removeChild(document.getElementById('tab'));
+        document
+          .getElementById('output')
+          .removeChild(document.getElementById('tab'));
       }
       const tab = document.createElement('table');
       tab.id = 'tab';
@@ -24,7 +26,9 @@ document.getElementById('cities').addEventListener('change', e => {
       timestamps.forEach(timestamp => {
         const th = document.createElement('th');
         const date = new Date(timestamp.dt_txt);
-        th.innerText = `${weekdayFormat.format(date)}\n${dateFormat.format(date)}\n${timeFormat.format(date)}`;
+        th.innerText = `${weekdayFormat.format(date)}\n${dateFormat.format(
+          date
+        )}\n${timeFormat.format(date)}`;
         trDate.appendChild(th);
       });
 
